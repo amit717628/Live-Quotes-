@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" integrity="sha512-PgQMlq+nqFLV4ylk1gwUOgm6CtIIXkKwaIHp/PAIWHzig/lKZSEGKEysh0TCVbHJXCLN7WetD8TFecIky75ZfQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Get-to-know</title>
+</head>
+<body>
+    <div class="container">
+<div class="inner">
+<div class="box">
+<p class="number"> 
+    <!-- Right Side Image -->
+    <img 
+    src="https://e7.pngegg.com/pngimages/639/641/png-clipart-quotation-mark-quote-unquote-comma-quotation-television-text.png"
+
+    alt="logo"
+    title="Logo_Png"
+    id="logo"
+    >
+</p>
+<!-- Text And Author -->
+<div class="text">
+    <i class="star fas fa-words-left"></i>
+    <p id="words" class="words"></p>
+    <p id="author" class="author"></p>
+</div>
+<!-- Get More Data -->
+<label class="button">
+<p id="more">Click To Load More</p>
+</label>
+<h6 style="text-align: center; color: rgb(57, 155, 0)">Developed By Aayan</h1>
+</div>
+</div>
+
+    </div>
+    <!-- Calling API -->
+  <script>
+    // Getting Elements
+    const words = document.getElementById("words")
+    const author = document.getElementById("author")
+    const button = document.getElementById("more")
+    let maindata = "";
+    // Taking Random Data
+    const newData = () => {
+        let randomWord = Math.floor(Math.random() * 10)
+        words.innerText = `${maindata[randomWord].text}`;
+        if(maindata[randomWord].author === null){
+            author.innerText = `Not Found`;
+        } else {
+            author.innerText = `- ${maindata[randomWord].author}`;
+        }
+       
+    }
+    // Calling Api on page vist or function load
+    const loadword = async () => {
+        const api = "https://type.fit/api/quotes";
+        try {
+            let data = await fetch(api)
+            maindata = await data.json();
+            newData();
+        } catch (error) {
+         console.log(error)
+        }
+
+    }
+  // Load More Function
+    button.addEventListener("click", loadword)
+loadword();
+  </script>
+
+
+</body>
+</html>
+
+
+
+<!-- A small practice project in JavaScript  -->
+<!-- https://github.com/AAYAN717628 -->
